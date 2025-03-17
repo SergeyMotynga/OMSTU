@@ -14,15 +14,10 @@ def hyperparameter_search(model_name, method_search, parameters, X_train, y_trai
     if model_name == 'elasticnet':
         model = ElasticNet(max_iter=max_iter)
 
-    pipe = Pipeline([
-        ('scaler', StandardScaler()),
-        (model_name, model)
-    ])
-
     if method_search == 'gridsearchcv':
-        search = GridSearchCV(pipe, parameters, cv=5)
+        search = GridSearchCV(model, parameters, cv=5)
     elif method_search == 'randomizedsearchcv':
-        search = RandomizedSearchCV(pipe, parameters, cv=5)
+        search = RandomizedSearchCV(model, parameters, cv=5)
 
     search.fit(X_train, y_train)
 
