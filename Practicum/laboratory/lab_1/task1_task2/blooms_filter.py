@@ -50,5 +50,5 @@ class BloomsFilter:
         if self.m != other.m or self.k != other.k:
             raise ValueError("Размеры массивов и количество хеш-функций должны совпадать")
         result = BloomsFilter(self.m, self.k)
-        result.array = self.array & other.array
+        result.array = self.array & other.array 
         return result
