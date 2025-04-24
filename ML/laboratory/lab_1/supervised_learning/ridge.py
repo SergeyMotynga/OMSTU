@@ -15,14 +15,17 @@ class ridge:
         for i in range(self.n_iter):
             y_pred = np.dot(X_train, self.weights) + self.bias
             errors = y_pred - y_train
-            dw = (1/self.n_samples) * np.dot(X_train.T, errors) + self.alpha * self.weights
-            db = (1/self.n_samples) * np.sum(errors)
-            grad_norm = np.linalg.norm(dw)
-            if grad_norm < self.tol:
-                print(f'Остановка на итерации {i}, grad_norm: {grad_norm}')
+
+            dw = (2 / self.n_samples) * np.dot(X_train.T, errors) + self.alpha * self.weights
+            db = (2 / self.n_samples) * np.sum(errors)
+
+            if np.linalg.norm(dw) < self.tol and abs(db) < self.tol:
+                print(f'Остановка на итерации {i}, ||dw||: {np.linalg.norm(dw):.6f}, |db|: {abs(db):.6f}')
                 break
+
             self.weights -= self.learning_rate * dw
             self.bias -= self.learning_rate * db
+
 
 
     def fit(self, X_train, y_train):
