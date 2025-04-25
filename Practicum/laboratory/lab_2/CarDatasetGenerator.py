@@ -21,7 +21,7 @@ class CarDatasetGenerator:
         ('напряжение_аккумулятора', 'quantitative')
     ]
 
-    def __init__(self, n_features: int, threshold: int = 50, random_state: int = None):
+    def __init__(self, n_features: int, threshold: int = 5, random_state: int = None):
         """
         n_features — количество признаков на объект.
         threshold — процент совпадающих признаков для коллизии [0, 100].
@@ -47,17 +47,16 @@ class CarDatasetGenerator:
                 data[name] = np.random.randint(0, 2, size=n_samples)
             elif f_type == 'nominal':
                 if name == 'тип_кузова':
-                    data[name] = np.random.choice(['седан', 'внедорожник', 'грузовик', 'хэтчбек'], size=n_samples)
+                    data[name] = np.random.randint(0, 4, size=n_samples)
                 elif name == 'привод':
-                    data[name] = np.random.choice(['передний', 'задний', 'полный'], size=n_samples)
+                    data[name] = np.random.randint(0, 3, size=n_samples)
                 elif name == 'топливо':
-                    data[name] = np.random.choice(['бензин', 'дизель', 'электро', 'гибрид'], size=n_samples)
+                    data[name] = np.random.randint(0, 4, size=n_samples)
             elif f_type == 'ordinal':
                 if name == 'уровень_топлива':
-                    levels = ['низкий', 'средний', 'высокий']
+                    levels = np.random.randint(0, 3, size=n_samples)
                 elif name == 'скоростной_режим':
-                    levels = ['медленно', 'нормально', 'быстро']
-                data[name] = pd.Categorical(np.random.choice(levels, size=n_samples), categories=levels, ordered=True)
+                    levels = np.random.randint(0, 3, size=n_samples)
             elif f_type == 'quantitative':
                 if name == 'угол_поворота':
                     data[name] = np.random.uniform(-180, 180, size=n_samples)
@@ -99,7 +98,7 @@ class CarDatasetGenerator:
             obj1 = df.loc[idx1].to_dict()
             obj2 = df.loc[idx2].to_dict()
             match_count = sum(obj1[k] == obj2[k] for k in obj1) / self.n_features
-            collision = 'да' if match_count >= self.threshold else 'нет'
+            collision = 1 if match_count >= self.threshold else 0
             pair_row = {f"1_{k}": obj1[k] for k in obj1}
             pair_row.update({f"2_{k}": obj2[k] for k in obj2})
             pair_row["collision"] = collision
