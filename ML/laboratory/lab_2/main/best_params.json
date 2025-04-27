@@ -1,0 +1,74 @@
+{
+    "LogisticRegression": {
+        "GridSearchCV": {
+            "params": {
+                "C": 1,
+                "class_weight": null,
+                "penalty": "l1",
+                "solver": "liblinear",
+                "tol": 0.001
+            },
+            "score": 0.9484170335962817
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "C": 2.300772379610957,
+                "class_weight": null,
+                "penalty": "l1",
+                "solver": "saga",
+                "tol": 0.004463858975144203
+            },
+            "score": 0.948222726785828
+        }
+    },
+    "kNN": {
+        "GridSearchCV": {
+            "params": {
+                "metric": "manhattan",
+                "n_neighbors": 9,
+                "weights": "distance"
+            },
+            "score": 0.9197584492323635
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "metric": "manhattan",
+                "n_neighbors": 14,
+                "weights": "distance"
+            },
+            "score": 0.9213128187916878
+        }
+    },
+    "NaiveBayes": {
+        "GridSearchCV": {
+            "params": {
+                "var_smoothing": 1e-09
+            },
+            "score": 0.919078800017302
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "var_smoothing": 4.1692152672389864e-07
+            },
+            "score": 0.919078800017302
+        }
+    },
+    "SVM": {
+        "GridSearchCV": {
+            "params": {
+                "C": 10,
+                "gamma": 0.01,
+                "kernel": "rbf"
+            },
+            "score": 0.9531768993660571
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "C": 61.78322147086956,
+                "gamma": 0.01153221482069061,
+                "kernel": "rbf"
+            },
+            "score": 0.9551194296166607
+        }
+    }
+}
