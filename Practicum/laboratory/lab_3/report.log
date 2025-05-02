@@ -1,0 +1,92 @@
+2025-05-02 23:23:29,748 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:23:47,182 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:24:06,408 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:24:34,683 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\1189344649.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:24:34,688 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1903, in run
+    self.last_generation_fitness = self.cal_pop_fitness()
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1860, in cal_pop_fitness
+    raise ex
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\1189344649.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:25:16,946 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\1227361110.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:25:16,950 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1903, in run
+    self.last_generation_fitness = self.cal_pop_fitness()
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1860, in cal_pop_fitness
+    raise ex
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\1227361110.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:25:50,089 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\3126908005.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:25:50,097 - pygad.pygad - ERROR - 'DecisionTreeClassifier' object is not callable
+Traceback (most recent call last):
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1903, in run
+    self.last_generation_fitness = self.cal_pop_fitness()
+                                   ^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1860, in cal_pop_fitness
+    raise ex
+  File "c:\Users\motyn\AppData\Local\Programs\Python\Python312\Lib\site-packages\pygad\pygad.py", line 1697, in cal_pop_fitness
+    fitness = self.fitness_func(self, sol, sol_idx)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\motyn\AppData\Local\Temp\ipykernel_38196\3126908005.py", line 3, in fitness_dt
+    model = dt(
+            ^^^
+TypeError: 'DecisionTreeClassifier' object is not callable
+2025-05-02 23:27:18,825 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:27:38,923 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.04854368932038833, best pos: [ 9.3580381  19.79310159  7.63899293]
+2025-05-02 23:27:38,938 - pyswarms.single.global_best - INFO - Optimize for 80 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:27:44,365 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.07766990291262132, best pos: [-9.37944019]
+2025-05-02 23:32:53,147 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:33:11,798 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.029126213592232997, best pos: [ 5.82114196  5.01435064 11.57646165]
+2025-05-02 23:33:11,808 - pyswarms.single.global_best - INFO - Optimize for 80 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:33:14,681 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.08737864077669899, best pos: [-7.31770502]
+2025-05-02 23:37:00,865 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:37:21,104 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.029126213592232997, best pos: [17.3727466   7.47608944  5.00632927]
+2025-05-02 23:37:21,110 - pyswarms.single.global_best - INFO - Optimize for 80 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-02 23:37:24,105 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.07766990291262132, best pos: [-6.15701734]
+2025-05-03 00:09:05,289 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-03 00:09:24,718 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.024271844660194164, best pos: [17.54677903 14.63342156 10.84030339]
+2025-05-03 00:09:24,726 - pyswarms.single.global_best - INFO - Optimize for 80 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-03 00:09:28,229 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.08737864077669899, best pos: [-11.19060072]
+2025-05-03 00:22:10,431 - pyswarms.single.global_best - INFO - Optimize for 100 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-03 00:22:30,681 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.03398058252427183, best pos: [7.95387545 7.84555776 4.94730359]
+2025-05-03 00:22:30,691 - pyswarms.single.global_best - INFO - Optimize for 80 iters with {'c1': 0.5, 'c2': 0.3, 'w': 0.9}
+2025-05-03 00:22:33,797 - pyswarms.single.global_best - INFO - Optimization finished | best cost: 0.09708737864077666, best pos: [-10.33664354]
