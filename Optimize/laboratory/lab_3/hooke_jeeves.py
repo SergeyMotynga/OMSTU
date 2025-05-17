@@ -1,5 +1,6 @@
 import numpy as np
 
+# Метод Хукса и Дживса
 def hooke_jeeves(f, x0, delta=0.5, alpha=2.0, eps=1e-6, max_iter=500):
     x_prev = np.array(x0, dtype=float)
     n = x_prev.size
@@ -11,7 +12,7 @@ def hooke_jeeves(f, x0, delta=0.5, alpha=2.0, eps=1e-6, max_iter=500):
         deltas = np.array(delta, dtype=float)
 
     def exploratory_move(x_base, deltas):
-        """Исследовательский шаг: перебор координатных смещений."""
+        # Исследовательский шаг: перебор координатных смещений.
         x = x_base.copy()
         f_base = f(x)
         for i in range(n):
