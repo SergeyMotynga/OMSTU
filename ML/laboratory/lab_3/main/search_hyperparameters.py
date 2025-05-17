@@ -1,10 +1,7 @@
 from typing import Literal, Dict, Any, Optional
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-from sklearn.linear_model import LogisticRegression
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.naive_bayes import GaussianNB
-from sklearn.svm import SVC
-from sklearn.tree import DecisionTreeClassifier
+from build_models import build_models
+from build_method_search import build_method_search
+from build_pipeline import build_pipeline
 
 
 def search_hyperparameters(
@@ -18,8 +15,8 @@ def search_hyperparameters(
         random_state: int=42,
         n_iter: int=30,
         n_jobs: int=2,
-        balance: bool=False,
-        scoring: Optional[str]=None
+        scoring: Optional[str]=None,
+        balanced: bool=True
         ) -> dict:
     '''
     search_hyperparameters - функция для поиска гиперпараметров для основных моделей классификации обучения с учитеелем (find bests hyperparameters for most popular classifier models on supervised learning)
@@ -62,36 +59,13 @@ def search_hyperparameters(
     scoring : Optional[str], default=None
         Метрика оценки модели классификации (metric for evaluation classifier model)
     '''
-    search = None
     model_name = model_name.lower()
     method_search = method_search.lower()
-
-    models = {
-        'DecisionTreeClassifier'.lower(): DecisionTreeClassifier(random_state=random_state, class_weight='balanced'),
-        'LogisticRegression'.lower(): LogisticRegression(max_iter=max_iter, random_state=random_state),
-        'kNN'.lower(): KNeighborsClassifier(),
-        'NaiveBayes'.lower(): GaussianNB(),
-        'SVM'.lower(): SVC(probability=True, random_state=random_state)
-    }
-    model = models[model_name]
-
-    if method_search == 'GridSearchCV'.lower():
-        search = GridSearchCV(
-            estimator=model, 
-            param_grid=param_grid,
-            cv=cv,
-            scoring=scoring,
-            n_jobs=n_jobs
-            )
-    elif method_search == 'RandomizedSearchCV'.lower():
-        search = RandomizedSearchCV(
-            estimator=model, 
-            param_distributions=param_grid,
-            n_iter=n_iter,
-            cv=cv,
-            scoring=scoring,
-            n_jobs=n_jobs
-            )
+    model = build_models(max_iter=max_iter, random_state=random_state, model_name=model_name)
+    if balanced:
+        model = build_pipeline(model)
+        param_grid = {f"model__{k}": v for k, v in param_grid.items()} 
+    search = build_method_search(method_search=method_search, model=model, cv=cv, param_grid=param_grid, scoring=scoring, n_jobs=n_jobs, n_iter=n_iter)
         
     search.fit(X_train, y_train)
     return {
