@@ -36,8 +36,7 @@ class TankEnv:
         # Доп. препятствия
         extra = [(2,2),(cols-3,rows//3),(cols//3,rows-3)]
         for cx, cy in extra:
-            self.obstacles.append(pygame.Rect(cx*self.cell_size, cy*self.cell_size,
-                                              self.cell_size, self.cell_size))
+            self.obstacles.append(pygame.Rect(cx*self.cell_size, cy*self.cell_size, self.cell_size, self.cell_size))
         # Границы
         self.obstacles += [
             pygame.Rect(0,0,self.width,self.cell_size),
@@ -49,8 +48,7 @@ class TankEnv:
         self.goals = []
         goal_cells = [(cols-2,rows-2),(1,rows-3),(cols-3,1)]
         for gx_i, gy_i in goal_cells:
-            pos = (gx_i*self.cell_size + self.cell_size/2,
-                   gy_i*self.cell_size + self.cell_size/2)
+            pos = (gx_i*self.cell_size + self.cell_size/2, gy_i*self.cell_size + self.cell_size/2)
             radius = int(self.cell_size*0.4)
             self.goals.append({'pos':pos,'radius':radius})
 
@@ -154,7 +152,7 @@ class TankEnv:
         if any(tank_rect.colliderect(obs) for obs in self.obstacles):
             reward-=10
             done=True
-        # Подсчёт вознаграждения за приближение/удаление
+        # Подсчёт вознаграждения за приближение
         curr = self._get_state()
         if prev['distance_to_goal']>curr['distance_to_goal']:
             reward+=10
