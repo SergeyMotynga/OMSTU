@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Practicum", "Practicum", "{9066378A-FCB8-0A49-824F-DD371AA8A0AD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "laboratory", "laboratory", "{3CF0A190-1EA5-3395-A53F-01587507184B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "lab_5", "lab_5", "{6B4DB830-ACA3-DB16-7A24-79BEB99BD069}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csharp", "Practicum\laboratory\lab_5\csharp\csharp.csproj", "{7B729C49-E3D2-C1FB-AB5E-93BBFF379641}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7B729C49-E3D2-C1FB-AB5E-93BBFF379641}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B729C49-E3D2-C1FB-AB5E-93BBFF379641}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B729C49-E3D2-C1FB-AB5E-93BBFF379641}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B729C49-E3D2-C1FB-AB5E-93BBFF379641}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3CF0A190-1EA5-3395-A53F-01587507184B} = {9066378A-FCB8-0A49-824F-DD371AA8A0AD}
+		{6B4DB830-ACA3-DB16-7A24-79BEB99BD069} = {3CF0A190-1EA5-3395-A53F-01587507184B}
+		{7B729C49-E3D2-C1FB-AB5E-93BBFF379641} = {6B4DB830-ACA3-DB16-7A24-79BEB99BD069}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D563007-E6FB-4340-8F0C-38C9D4B06864}
+	EndGlobalSection
+EndGlobal
