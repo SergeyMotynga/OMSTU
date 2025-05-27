@@ -39,7 +39,7 @@ namespace lab5Integration
 
         static void RunPythonScript(string scriptPath)
         {
-            Console.WriteLine($"\n▶ Выполнение: {scriptPath}");
+            Console.WriteLine($"\nВыполнение: {scriptPath}");
             var process = new Process
             {
                 StartInfo = new ProcessStartInfo
@@ -60,18 +60,18 @@ namespace lab5Integration
 
             Console.WriteLine(output);
             if (!string.IsNullOrEmpty(error))
-                Console.WriteLine("⚠ Ошибка: " + error);
+                Console.WriteLine("Ошибка: " + error);
         }
 
         static void DisplayCsv(string csvPath)
         {
             if (!File.Exists(csvPath))
             {
-                Console.WriteLine("❌ CSV не найден: " + csvPath);
+                Console.WriteLine("CSV не найден: " + csvPath);
                 return;
             }
 
-            Console.WriteLine("\n📊 Результаты моделей:");
+            Console.WriteLine("\nРезультаты моделей:");
             using (var reader = new StreamReader(csvPath))
             using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
