@@ -85,55 +85,46 @@ parameters = {
     },
     'CatBoostClassifier': {
         'GridSearchCV': {
-            'iterations':      [100, 200, 500],
-            'depth':           [4, 6, 8],
-            'learning_rate':   [0.01, 0.1, 0.2],
-            'l2_leaf_reg':     [3, 5, 7],
-            'rsm':             [0.6, 0.8, 1.0]
+            'iterations':      [100, 300],
+            'depth':           [4, 8],
+            'learning_rate':   [0.05, 0.1],
+            'l2_leaf_reg':     [3, 7]
         },
         'RandomizedSearchCV': {
-            'iterations':        randint(50, 500),
-            'depth':             randint(3, 10),
-            'learning_rate':     uniform(0.01, 0.19),
-            'l2_leaf_reg':       randint(1, 10),
-            'rsm':               uniform(0.5, 0.5),
-            'bagging_temperature': uniform(0.0, 1.0)
+            'iterations':      randint(50, 300),
+            'depth':           randint(4, 8),
+            'learning_rate':   uniform(0.05, 0.15),
+            'l2_leaf_reg':     randint(3, 7)
         }
     },
     'XGBClassifier': {
         'GridSearchCV': {
-            'n_estimators':      [100, 200, 500],
-            'max_depth':         [3, 6, 9],
-            'learning_rate':     [0.01, 0.1, 0.2],
-            'subsample':         [0.6, 0.8, 1.0],
-            'colsample_bytree':  [0.6, 0.8, 1.0]
+            'n_estimators':    [100, 300],
+            'max_depth':       [3, 6],
+            'learning_rate':   [0.05, 0.1],
+            'subsample':       [0.8, 1.0]
         },
         'RandomizedSearchCV': {
-            'n_estimators':      randint(50, 500),
-            'max_depth':         randint(3, 12),
-            'learning_rate':     uniform(0.01, 0.19),
-            'subsample':         uniform(0.5, 0.5),
-            'colsample_bytree':  uniform(0.5, 0.5),
-            'reg_alpha':         uniform(0.0, 1.0),
-            'reg_lambda':        uniform(0.0, 1.0)
+            'n_estimators':    randint(50, 300),
+            'max_depth':       randint(3, 7),
+            'learning_rate':   uniform(0.05, 0.15),
+            'subsample':       uniform(0.7, 0.3),
+            'colsample_bytree': uniform(0.7, 0.3)
         }
     },
     'LGBMClassifier': {
         'GridSearchCV': {
-            'n_estimators':      [100, 200, 500],
-            'learning_rate':     [0.01, 0.1, 0.2],
-            'num_leaves':        [31, 50, 100],
-            'subsample':         [0.6, 0.8, 1.0],
-            'colsample_bytree':  [0.6, 0.8, 1.0]
+            'n_estimators':    [100, 300],
+            'learning_rate':   [0.05, 0.1],
+            'num_leaves':      [31, 70],
+            'subsample':       [0.8, 1.0]
         },
         'RandomizedSearchCV': {
-            'n_estimators':      randint(50, 500),
-            'learning_rate':     uniform(0.01, 0.19),
-            'num_leaves':        randint(20, 150),
-            'subsample':         uniform(0.5, 0.5),
-            'colsample_bytree':  uniform(0.5, 0.5),
-            'reg_alpha':         uniform(0.0, 1.0),
-            'reg_lambda':        uniform(0.0, 1.0)
+            'n_estimators':    randint(50, 300),
+            'learning_rate':   uniform(0.05, 0.15),
+            'num_leaves':      randint(20, 70),
+            'subsample':       uniform(0.7, 0.3),
+            'colsample_bytree': uniform(0.7, 0.3)
         }
     }
 }

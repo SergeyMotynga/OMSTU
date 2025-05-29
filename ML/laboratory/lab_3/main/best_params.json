@@ -98,5 +98,67 @@
             },
             "score": 0.8676269422542263
         }
+    },
+    "CatBoostClassifier": {
+        "GridSearchCV": {
+            "params": {
+                "model__depth": 4,
+                "model__iterations": 300,
+                "model__l2_leaf_reg": 3,
+                "model__learning_rate": 0.1
+            },
+            "score": 0.9071210700942508
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "model__depth": 5,
+                "model__iterations": 118,
+                "model__l2_leaf_reg": 6,
+                "model__learning_rate": 0.19588128860472298
+            },
+            "score": 0.9095546315878257
+        }
+    },
+    "XGBClassifier": {
+        "GridSearchCV": {
+            "params": {
+                "model__learning_rate": 0.1,
+                "model__max_depth": 3,
+                "model__n_estimators": 100,
+                "model__subsample": 1.0
+            },
+            "score": 0.8941119003323195
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "model__colsample_bytree": 0.8553071206465139,
+                "model__learning_rate": 0.15857516471095234,
+                "model__max_depth": 4,
+                "model__n_estimators": 127,
+                "model__subsample": 0.8597524544048112
+            },
+            "score": 0.8959974154892175
+        }
+    },
+    "LGBMClassifier": {
+        "GridSearchCV": {
+            "params": {
+                "model__learning_rate": 0.05,
+                "model__n_estimators": 300,
+                "model__num_leaves": 70,
+                "model__subsample": 0.8
+            },
+            "score": 0.8902438168795648
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "model__colsample_bytree": 0.7230040923184692,
+                "model__learning_rate": 0.147336442481094,
+                "model__n_estimators": 207,
+                "model__num_leaves": 25,
+                "model__subsample": 0.8888960387781548
+            },
+            "score": 0.8943680186430929
+        }
     }
 }
