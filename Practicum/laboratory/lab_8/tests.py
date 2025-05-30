@@ -3,6 +3,7 @@ from world import World
 from plants import Plant, Lumiere, Obscurite, Demi
 from animals import Animal, Pauvre, Malheureux
 from time_manager import TimeManager
+from registry import registry
 
 class TestEcosystem(unittest.TestCase):
     def setUp(self):
@@ -10,11 +11,11 @@ class TestEcosystem(unittest.TestCase):
         self.world.time_manager = TimeManager()
 
     def test_registry(self):
-        self.assertIn('Lumiere', World.registry['plants'])
-        self.assertIn('Obscurite', World.registry['plants'])
-        self.assertIn('Demi', World.registry['plants'])
-        self.assertIn('Pauvre', World.registry['animals'])
-        self.assertIn('Malheureux', World.registry['animals'])
+        self.assertIn('Lumiere', registry['plants'])
+        self.assertIn('Obscurite', registry['plants'])
+        self.assertIn('Demi', registry['plants'])
+        self.assertIn('Pauvre', registry['animals'])
+        self.assertIn('Malheureux', registry['animals'])
 
     def test_plant_methods(self):
         plant = Lumiere(0, 0)
