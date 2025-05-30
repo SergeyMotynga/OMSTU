@@ -160,5 +160,166 @@
             },
             "score": 0.8943680186430929
         }
+    },
+    "DecisionTreeRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "criterion": "absolute_error",
+                "max_depth": 10,
+                "min_samples_leaf": 10,
+                "min_samples_split": 2
+            },
+            "score": 0.6880262463301375
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "ccp_alpha": 0.018687043305360484,
+                "criterion": "squared_error",
+                "max_depth": 13,
+                "max_features": null,
+                "max_leaf_nodes": 95,
+                "min_samples_leaf": 12,
+                "min_samples_split": 10,
+                "splitter": "best"
+            },
+            "score": 0.6493910343008729
+        }
+    },
+    "RandomForestRegressor": {
+        "RandomizedSearchCV": {
+            "params": {
+                "bootstrap": true,
+                "ccp_alpha": 0.011780440309441356,
+                "criterion": "squared_error",
+                "max_depth": 38,
+                "max_features": 0.8406695284231516,
+                "min_samples_leaf": 4,
+                "min_samples_split": 15,
+                "n_estimators": 302,
+                "oob_score": false
+            },
+            "score": 0.7499657819355349
+        }
+    },
+    "BaggingRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "bootstrap": true,
+                "max_features": 1.0,
+                "max_samples": 1.0,
+                "n_estimators": 100
+            },
+            "score": 0.7677296492130177
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "bootstrap": true,
+                "max_features": 0.9668581492164872,
+                "max_samples": 0.7303971062536125,
+                "n_estimators": 97
+            },
+            "score": 0.7599137539054879
+        }
+    },
+    "GradientBoostingRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "learning_rate": 0.1,
+                "max_depth": 3,
+                "max_features": null,
+                "n_estimators": 150,
+                "subsample": 0.8
+            },
+            "score": 0.7867542806107641
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "learning_rate": 0.11832970230102803,
+                "max_depth": 3,
+                "max_features": null,
+                "min_samples_leaf": 1,
+                "n_estimators": 152,
+                "subsample": 0.8424361077080462
+            },
+            "score": 0.7850934889419658
+        }
+    },
+    "StackingRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "final_estimator__C": 10.0,
+                "passthrough": false
+            },
+            "score": -0.07331353427941645
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "final_estimator__C": 9.25665442068537,
+                "passthrough": false
+            },
+            "score": -0.07332592812738963
+        }
+    },
+    "CatBoostRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "depth": 4,
+                "iterations": 300,
+                "l2_leaf_reg": 3,
+                "learning_rate": 0.1
+            },
+            "score": 0.7803493547862731
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "depth": 5,
+                "iterations": 277,
+                "l2_leaf_reg": 4,
+                "learning_rate": 0.12309243446865595
+            },
+            "score": 0.7838335459132472
+        }
+    },
+    "LGBMRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "learning_rate": 0.05,
+                "n_estimators": 100,
+                "num_leaves": 31,
+                "subsample": 0.8
+            },
+            "score": 0.755227879087216
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "colsample_bytree": 0.9688586091392708,
+                "learning_rate": 0.08305969402967735,
+                "n_estimators": 103,
+                "num_leaves": 23,
+                "subsample": 0.8301715417918253
+            },
+            "score": 0.7576320842047853
+        }
+    },
+    "XGBRegressor": {
+        "GridSearchCV": {
+            "params": {
+                "learning_rate": 0.05,
+                "max_depth": 6,
+                "n_estimators": 300,
+                "subsample": 0.8
+            },
+            "score": 0.7794088831153719
+        },
+        "RandomizedSearchCV": {
+            "params": {
+                "colsample_bytree": 0.956117061413339,
+                "learning_rate": 0.056435594634443975,
+                "max_depth": 5,
+                "n_estimators": 272,
+                "subsample": 0.9187948780854645
+            },
+            "score": 0.7838671080822355
+        }
     }
 }

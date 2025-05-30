@@ -23,7 +23,7 @@ def search_hyperparameters(
 
     Parameters
     ----------
-    model_name : {'LogisticRegression', 'kNN', 'NaiveBayes', 'SVM'}, default=None
+    model_name : default=None
         Название модели классификации (name of classifier model)
 
     method_search : {'GridSearchCV', 'RandomizedSearchCV'}, default=None
@@ -63,7 +63,7 @@ def search_hyperparameters(
     method_search = method_search.lower()
     model = build_models(max_iter=max_iter, random_state=random_state, model_name=model_name)
     if balanced:
-        model = build_pipeline(model)
+        model = build_pipeline(model, sample=balanced)
         param_grid = {f"model__{k}": v for k, v in param_grid.items()} 
     search = build_method_search(method_search=method_search, model=model, cv=cv, param_grid=param_grid, scoring=scoring, n_jobs=n_jobs, n_iter=n_iter)
         
