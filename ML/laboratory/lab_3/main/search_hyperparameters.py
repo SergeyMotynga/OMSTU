@@ -5,7 +5,7 @@ from build_pipeline import build_pipeline
 
 
 def search_hyperparameters(
-        model_name: Literal['LogisticRegression', 'kNN', 'NaiveBayes', 'SVM', 'DecisionTreeClassifier']=None,
+        model_name=None,
         method_search: Literal['GridSearchCV', 'RandomizedSearchCV']=None,
         X_train=None,
         y_train=None,

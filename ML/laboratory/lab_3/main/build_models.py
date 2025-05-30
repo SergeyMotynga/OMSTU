@@ -4,6 +4,9 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.svm import SVC
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier, BaggingClassifier, GradientBoostingClassifier, StackingClassifier
+from catboost import CatBoostClassifier
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 
 def build_models(
         max_iter: int=10000,
@@ -14,6 +17,9 @@ def build_models(
     lg = LogisticRegression(max_iter=max_iter, random_state=random_state)
     knn = KNeighborsClassifier()
     nb = GaussianNB()
+    cb = CatBoostClassifier()
+    xgb = XGBClassifier()
+    lb = LGBMClassifier()
     svm = SVC(probability=True, random_state=random_state)
     rf = RandomForestClassifier(random_state=random_state, n_jobs=2)
     base_estimators = [
@@ -30,6 +36,9 @@ def build_models(
         'LogisticRegression'.lower(): lg,
         'kNN'.lower(): knn,
         'NaiveBayes'.lower(): nb,
-        'SVM'.lower(): svm
+        'SVM'.lower(): svm,
+        'CatBoostClassifier'.lower(): cb,
+        'XGBClassifier'.lower(): xgb,
+        'LGBMClassifier'.lower(): lb
         }
     return models[model_name]
