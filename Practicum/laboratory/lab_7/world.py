@@ -19,7 +19,6 @@ class World:
                     plant_type = random.choice([Lumiere, Obscurite, Demi])
                     self.grid[y][x] = plant_type(x, y)
                     self.entities.append(self.grid[y][x])
-        # Add some animals
         for _ in range(int(self.width * self.height * 0.05)):
             x, y = self.get_random_empty_position()
             if x is not None:

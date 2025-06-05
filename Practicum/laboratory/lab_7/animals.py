@@ -96,7 +96,7 @@ class Malheureux(Animal):
     def modify_behavior(self):
         time = self.world.time_manager.time_of_day if hasattr(self, 'world') else "morning"
         self.active = time in ["morning", "evening"]
-        self.speed = 1 if self.hunger < 5 else 0.5
+        self.speed = 1 if self.hunger < 5 else 0.5      
 
     def update(self, world):
         self.world = world

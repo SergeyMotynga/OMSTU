@@ -6,9 +6,9 @@ from world import World
 async def main():
     pygame.init()
     cell_size = 20
-    width, height = 40, 20
+    width, height = 80, 40
     screen_width = cell_size * width
-    screen_height = cell_size * height + 100  # Extra space for legend
+    screen_height = cell_size * height + 120
     screen = pygame.display.set_mode((screen_width, screen_height))
     pygame.display.set_caption("Ecosystem Simulation")
     
@@ -24,7 +24,7 @@ async def main():
     
     font = pygame.font.SysFont('arial', 16)
     clock = pygame.time.Clock()
-    FPS = 100
+    FPS = 60
     
     running = True
     while running:
@@ -42,7 +42,7 @@ async def main():
                     color = colors[type(entity).__name__]
                     pygame.draw.rect(screen, color, (x * cell_size, y * cell_size, cell_size, cell_size))
         
-        legend_y = world.height * cell_size + 20
+        legend_y = world.height * cell_size + 30
         legend_items = [
             ("Lumiere (Sun)", colors['Lumiere']),
             ("Obscurite (Moon)", colors['Obscurite']),
