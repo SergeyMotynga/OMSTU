@@ -4,5 +4,5 @@ numpy
 seaborn
 matplotlib
 joblib
-tensorflow
+tensorflow==2.15.0
 Pillow
