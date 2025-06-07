@@ -1,2 +1,4 @@
 .vs
 .obsidian
+pycaret_env
+pyvenv.cfg

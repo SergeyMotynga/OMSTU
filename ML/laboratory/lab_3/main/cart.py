@@ -1,6 +1,43 @@
 import numpy as np
 from collections import Counter
 import pandas as pd
+from abc import ABC, abstractmethod
+
+# Абстрактный базовый класс для метрик и вычисления значения
+class TaskStrategy(ABC):
+    @abstractmethod
+    def compute_metric(self, y):
+        """Вычисление метрики качества (например, Gini или MSE)."""
+        pass
+
+    @abstractmethod
+    def compute_value(self, y):
+        """Вычисление значения для листового узла."""
+        pass
+
+# Стратегия для классификации (Gini)
+class ClassificationStrategy(TaskStrategy):
+    def compute_metric(self, y):
+        counter = Counter(y)
+        impurity = 1.0
+        for count in counter.values():
+            prob = count / len(y)
+            impurity -= prob ** 2
+        return impurity
+
+    def compute_value(self, y):
+        return Counter(y).most_common(1)[0][0]
+
+# Стратегия для регрессии (MSE)
+class RegressionStrategy(TaskStrategy):
+    def compute_metric(self, y):
+        if len(y) == 0:
+            return 0
+        mean = np.mean(y)
+        return np.mean((y - mean) ** 2)
+
+    def compute_value(self, y):
+        return np.mean(y)
 
 # Класс узла дерева
 class Node:
@@ -9,39 +46,20 @@ class Node:
         self.threshold = threshold  # Порог для разделения
         self.left = left           # Левый потомок
         self.right = right         # Правый потомок
-        self.value = value         # Значение для листового узла (класс или число)
+        self.value = value         # Значение для листового узла
 
 # Класс CART
 class CART:
-    def __init__(self, task_type="classification", max_depth=None, min_samples_split=2):
-        self.task_type = task_type                # Тип задачи: "classification" или "regression"
+    def __init__(self, strategy: TaskStrategy, max_depth=None, min_samples_split=2):
+        self.strategy = strategy
         self.max_depth = max_depth                # Максимальная глубина дерева
         self.min_samples_split = min_samples_split # Минимальное число образцов для разделения
         self.root = None
 
-    # Метрика Gini для классификации
-    def _gini(self, y):
-        counter = Counter(y)
-        impurity = 1.0
-        for count in counter.values():
-            prob = count / len(y)
-            impurity -= prob ** 2
-        return impurity
-
-    # MSE для регрессии
-    def _mse(self, y):
-        if len(y) == 0:
-            return 0
-        mean = np.mean(y)
-        return np.mean((y - mean) ** 2)
-
     # Вычисление качества разделения
     def _split_score(self, left_y, right_y):
-        if self.task_type == "classification":
-            score = (len(left_y) * self._gini(left_y) + len(right_y) * self._gini(right_y)) / (len(left_y) + len(right_y))
-        else:
-            score = (len(left_y) * self._mse(left_y) + len(right_y) * self._mse(right_y)) / (len(left_y) + len(right_y))
-        return score
+        return (len(left_y) * self.strategy.compute_metric(left_y) + 
+                len(right_y) * self.strategy.compute_metric(right_y)) / (len(left_y) + len(right_y))
 
     # Поиск лучшего разделения
     def _best_split(self, X, y):
@@ -73,20 +91,12 @@ class CART:
 
         # Условия остановки
         if (self.max_depth is not None and depth >= self.max_depth) or n_samples < self.min_samples_split:
-            if self.task_type == "classification":
-                value = Counter(y).most_common(1)[0][0]
-            else:
-                value = np.mean(y)
-            return Node(value=value)
+            return Node(value=self.strategy.compute_value(y))
 
         # Поиск лучшего разделения
         feature, threshold, score = self._best_split(X, y)
         if feature is None:
-            if self.task_type == "classification":
-                value = Counter(y).most_common(1)[0][0]
-            else:
-                value = np.mean(y)
-            return Node(value=value)
+            return Node(value=self.strategy.compute_value(y))
 
         # Разделение данных
         left_mask = X[:, feature] <= threshold
