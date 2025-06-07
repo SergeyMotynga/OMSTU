@@ -22,10 +22,10 @@ def developer_info():
     
     # Отображение фотографии разработчика
     try:
-        image = Image.open("developer_photo.jpg")  # Укажи путь к своей фотографии
+        image = Image.open("Photo.jpg")  # Укажи путь к своей фотографии
         st.image(image, caption="Фото разработчика", width=300)
     except FileNotFoundError:
-        st.warning("Фото разработчика не найдено. Загрузи файл 'developer_photo.jpg'.")
+        st.warning("Фото разработчика не найдено. Загрузи файл 'Photo.jpg'.")
 
 def dataset_info():
     # Страница с описанием датасета
