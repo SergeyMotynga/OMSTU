@@ -77,7 +77,7 @@ def main_page():
     if "last_text_for_variants" not in st.session_state:
         st.session_state.last_text_for_variants = ""
 
-    user_text = st.text_area("Введите текст:")
+    user_text = st.text_area("Введите текст:").replace('ё', 'е').replace('Ё', 'Е')
 
     if user_text != st.session_state.last_text_for_variants:
         st.session_state.dec_variants = {}
@@ -100,9 +100,9 @@ def main_page():
             file_name = "Шифр_Цезаря_Шифровка.txt"
             file_content = (
                 "Результат шифрования (Цезарь)\n"
-                f"Исходный текст:\n{user_text}\n\n"
+                f"Исходный текст (ОТ):\n{user_text}\n\n"
                 f"Ключ: {shift}\n\n"
-                f"Зашифрованный текст:\n{result}\n"
+                f"Зашифрованный текст (ШТ):\n{result}\n"
             )
             st.success("Текст зашифрован. Файл готов к скачиванию.")
 
@@ -112,11 +112,11 @@ def main_page():
                 file_name = "Шифр_Цезаря_Расшифровка_Все_Ключи.txt"
                 lines = [
                     "Результат расшифровки (перебор ключей)",
-                    f"Исходный текст:\n{user_text}\n"
+                    f"ШИФР-ТЕКСТ (ШТ):\n{user_text}\n"
                 ]
                 for k in range(1, 32):
                     lines.append(f"Ключ: {k}")
-                    lines.append(all_results[k])
+                    lines.append(f"РАСШИФРОВАННЫЙ ТЕКСТ (ОТ): {all_results[k]}")
                     lines.append("")
                 file_content = "\n".join(lines)
                 st.info("Расшифровка перебором выполнена. Файл готов к скачиванию.")
@@ -126,11 +126,11 @@ def main_page():
                 file_name = "Шифр_Цезаря_Расшифровка.txt"
                 lines = [
                     "Результаты расшифровки (выбранные ключи)",
-                    f"Исходный текст:\n{user_text}\n"
+                    f"ШИФР-ТЕКСТ (ШТ):\n{user_text}\n"
                 ]
                 for k in sorted(st.session_state.dec_variants.keys()):
                     lines.append(f"Ключ: {k}")
-                    lines.append(st.session_state.dec_variants[k])
+                    lines.append(f"РАСШИФРОВАННЫЙ ТЕКСТ (ОТ): {st.session_state.dec_variants[k]}")
                     lines.append("")
                 file_content = "\n".join(lines)
                 st.success("Вариант добавлен/обновлён. Файл готов к скачиванию.")
