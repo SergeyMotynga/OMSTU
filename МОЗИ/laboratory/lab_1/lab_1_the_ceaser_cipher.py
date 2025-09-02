@@ -70,6 +70,11 @@ def get_shift(action: str):
             return None
 
 def main_page():
+    st.set_page_config(
+        page_title="Шифр Цезаря",
+        page_icon="🔑",
+        layout="centered"
+    )
     st.title("Шифр Цезаря")
 
     if "dec_variants" not in st.session_state:
