@@ -7,80 +7,91 @@ def isRussia(letter: str) -> bool:
 
 def encryption(text: str, k: int) -> str:
     result = ''
-    for i in range(len(text)):
-        letter = text[i]
-        if not isRussia(letter) or letter in EXCEPTIONS:
-            result += letter
+    for ch in text:
+        if not isRussia(ch) or ch in EXCEPTIONS:
+            result += ch
             continue
-        elif letter.islower():
-            result += chr(ord('а') + (ord(letter) + k - ord('а')) % 32)
+        if ch.islower():
+            result += chr(ord('а') + (ord(ch) + k - ord('а')) % 32)
         else:
-            result += chr(ord('А') + (ord(letter) + k - ord('А')) % 32)
+            result += chr(ord('А') + (ord(ch) + k - ord('А')) % 32)
     return result
 
-def decrypt_enumeration(text):
+def decrypt_enumeration(text: str):
     result = {}
     for k in range(1, 32):
-        result[k] = ''
-        for i in range(len(text)):
-            letter = text[i]
-            if not isRussia(letter) or letter in EXCEPTIONS:
-                result[k] += letter
+        out = ''
+        for ch in text:
+            if not isRussia(ch) or ch in EXCEPTIONS:
+                out += ch
                 continue
-            elif letter.islower():
-                result[k] += chr(ord('я') - (ord('я') - ord(letter) + k) % 32)
+            if ch.islower():
+                out += chr(ord('я') - (ord('я') - ord(ch) + k) % 32)
             else:
-                result[k] += chr(ord('Я') - (ord('Я') - ord(letter) + k) % 32)
+                out += chr(ord('Я') - (ord('Я') - ord(ch) + k) % 32)
+        result[k] = out
     return result
 
 def decrypt(text: str, k: int=None):
-    result = ''
-    if (k is None): 
-        result = decrypt_enumeration(text)
-    else:
-        for i in range(len(text)):
-            letter = text[i]
-            if not isRussia(letter) or letter in EXCEPTIONS:
-                result += letter
-                continue
-            elif letter.islower():
-                result += chr(ord('я') - (ord('я') - ord(letter) + k) % 32)
-            else:
-                result += chr(ord('Я') - (ord('Я') - ord(letter) + k) % 32)
-    return result
+    if k is None:
+        return decrypt_enumeration(text)
+    out = ''
+    for ch in text:
+        if not isRussia(ch) or ch in EXCEPTIONS:
+            out += ch
+            continue
+        if ch.islower():
+            out += chr(ord('я') - (ord('я') - ord(ch) + k) % 32)
+        else:
+            out += chr(ord('Я') - (ord('Я') - ord(ch) + k) % 32)
+    return out
+
+def parse_shift_input(label: str, key: str):
+    """
+    Возвращает (shift_int_or_None, is_valid, error_message)
+    Пустое значение -> None, not valid (если обязательно)
+    """
+    raw = st.text_input(label, key=key, placeholder="1–31")
+    raw = raw.strip()
+    if raw == "":
+        return None, False, "Укажите ключ от 1 до 31."
+    try:
+        val = int(raw)
+    except ValueError:
+        return None, False, "Ключ должен быть целым числом."
+    if 1 <= val <= 31:
+        return val, True, ""
+    return None, False, "Ключ должен быть в диапазоне от 1 до 31."
 
 def get_shift(action: str):
+    """
+    Возвращает (shift_or_None, is_valid)
+    - Для Шифровки ключ обязателен и валидность проверяется.
+    - Для Расшифровки: если выбран чекбокс, проверяем валидность; иначе None/valid.
+    """
     if action == "Шифровка":
-        shift = st.number_input(
-            label='Шаг от 1 до 31',
-            min_value=1, max_value=31, step=1,
-            key="enc_shift"
-        )
-        return int(shift)
+        shift, ok, err = parse_shift_input("Шаг от 1 до 31", "enc_shift")
+        if not ok and err:
+            st.warning(err)
+        return shift, ok
     else:
-        use_step = st.checkbox("Выбрать шаг", value=False, key="dec_use_step")
+        use_step = st.checkbox("Указать шаг вручную", value=False, key="dec_use_step")
         if use_step:
-            shift = st.number_input(
-                label='Шаг от 1 до 31',
-                min_value=1, max_value=31, step=1,
-                key="dec_shift"
-            )
-            return int(shift)
+            shift, ok, err = parse_shift_input("Шаг от 1 до 31", "dec_shift")
+            if not ok and err:
+                st.warning(err)
+            return shift, ok
         else:
-            return None
+            return None, True
 
 def main_page():
-    st.set_page_config(
-        page_title="Шифр Цезаря",
-        page_icon="🔑",
-        layout="centered"
-    )
+    st.set_page_config(page_title="Шифр Цезаря", page_icon="🔑", layout="centered")
     st.title("Шифр Цезаря")
 
-    if "dec_variants" not in st.session_state:
-        st.session_state.dec_variants = {}
-    if "last_text_for_variants" not in st.session_state:
-        st.session_state.last_text_for_variants = ""
+    st.session_state.setdefault("dec_variants", {})
+    st.session_state.setdefault("last_text_for_variants", "")
+    st.session_state.setdefault("last_result_title", "")
+    st.session_state.setdefault("last_result_text", "")
 
     user_text = st.text_area("Введите текст:").replace('ё', 'е').replace('Ё', 'Е')
 
@@ -89,19 +100,25 @@ def main_page():
         st.session_state.last_text_for_variants = user_text
 
     action = st.selectbox("Выберите действие:", ("Шифровка", "Расшифровка"))
-    shift = get_shift(action)
+    shift, shift_valid = get_shift(action)
 
     if action == "Расшифровка" and shift is not None:
         if st.button("Очистить накопленные варианты", key="clear_variants_btn"):
             st.session_state.dec_variants = {}
             st.info("Список вариантов очищен.")
 
-    if st.button(action, key="do_action_btn"):
+    disable_action = (user_text.strip() == "") or (not shift_valid)
+    do_action = st.button(action, key="do_action_btn", disabled=disable_action, use_container_width=True)
+
+    if do_action:
         file_name = None
         file_content = None
 
         if action == "Шифровка":
             result = encryption(user_text, shift)
+            st.session_state.last_result_title = f"Зашифрованный текст (ШТ), ключ {shift}"
+            st.session_state.last_result_text = result
+
             file_name = "Шифр_Цезаря_Шифровка.txt"
             file_content = (
                 "Результат шифрования (Цезарь)\n"
@@ -114,6 +131,10 @@ def main_page():
         else:
             if shift is None:
                 all_results = decrypt(user_text, None)
+                st.session_state.last_result_title = "Перебор ключей (превью)"
+                preview_key = st.selectbox("Показать результат для ключа:", list(range(1, 32)), key="preview_key")
+                st.session_state.last_result_text = all_results.get(preview_key, "")
+
                 file_name = "Шифр_Цезаря_Расшифровка_Все_Ключи.txt"
                 lines = [
                     "Результат расшифровки (перебор ключей)",
@@ -126,7 +147,11 @@ def main_page():
                 file_content = "\n".join(lines)
                 st.info("Расшифровка перебором выполнена. Файл готов к скачиванию.")
             else:
-                st.session_state.dec_variants[shift] = decrypt(user_text, shift)
+                dec = decrypt(user_text, shift)
+                st.session_state.dec_variants[shift] = dec
+
+                st.session_state.last_result_title = f"Расшифрованный текст (ОТ), ключ {shift}"
+                st.session_state.last_result_text = dec
 
                 file_name = "Шифр_Цезаря_Расшифровка.txt"
                 lines = [
@@ -146,5 +171,15 @@ def main_page():
                 data=file_content,
                 file_name=file_name,
                 mime="text/plain",
-                key="download_btn"
+                key="download_btn",
+                use_container_width=True
             )
+
+    if st.session_state.get("last_result_text", ""):
+        st.subheader(st.session_state.get("last_result_title", "Результат"))
+        st.text_area(
+            "Последний вывод:",
+            value=st.session_state["last_result_text"],
+            height=200,
+            key="last_output_area",
+        )
